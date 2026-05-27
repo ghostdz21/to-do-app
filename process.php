@@ -7,32 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST'){
 
 $action = $_POST['action'] ?? '';
 
-if ($action === 'add'){
-  $task = $_POST['task'] ?? '';
 
-  $errors = [];
-  $_SESSION['success']= '';
-
-  if(empty(trim($task))){
-    $errors[] = "your task is empty";}
-
-  if(strlen(trim($task))<3){
-    $errors[] = "Task must be at least 3 caracters";}
-
-  if(is_numeric($task)){
-    $errors[] = "a number is not a task";
-  }
-
-  if(!empty($errors)){
-    $_SESSION['old'] = $task;
-    $_SESSION['errors'] = $errors;
-  }else{
-    $id = uniqid();
-    $data = "$id|$task|pending";
-    file_put_contents("task.txt",$data.PHP_EOL,FILE_APPEND);
-    $_SESSION['success'] = "task submitted successfully";
-  }
-}
 // complete action code
 
 if ($action === 'complete'){
